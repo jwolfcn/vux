@@ -82,7 +82,7 @@ export default {
         this.currentValue = [this.currentValue[length - 1]]
       }
       const val = pure(this.currentValue)
-      this.tempValue = val.length ? val[0] : ''
+      this.tempValue = this.isRadio ? this.value[0] : this.value 
     }
   },
   created () {
@@ -166,7 +166,7 @@ export default {
   },
   watch: {
     tempValue (val) {
-      const _val = val ? [val] : []
+      const _val = Array.isArray(val) ? val : [val]
       this.$emit('input', _val)
       this.$emit('on-change', _val, getLabels(this.options, _val))
     },
